@@ -118,6 +118,7 @@ class DialogButton {
           ),
           child: Text(
             positiveButtonName!,
+            overflow: TextOverflow.ellipsis,
             style: positiveButtonStyle ??
                 Theme.of(context).textTheme.titleMedium?.copyWith(
                       color: Colors.white,
@@ -147,6 +148,7 @@ class DialogButton {
           ),
           child: Text(
             negativeButtonName!,
+            overflow: TextOverflow.ellipsis,
             style: negativeButtonStyle ??
                 Theme.of(context).textTheme.titleMedium?.copyWith(
                       color: Theme.of(context).primaryColor,

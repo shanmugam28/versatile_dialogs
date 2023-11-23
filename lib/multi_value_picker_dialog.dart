@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'dialog_buttons.dart';
 
-/// Defines the type of selection behavior in the [MultiSelectableDialog].
+/// Defines the type of selection behavior in the [MultiValuePickerDialog].
 ///
-/// The [SelectionType] enum is used to specify how items in the [MultiSelectableDialog]
+/// The [SelectionType] enum is used to specify how items in the [MultiValuePickerDialog]
 /// should be selected by users. It has two possible values:
 ///
 /// - [checkboxTap]: Users can select items by tapping on checkboxes.
@@ -23,9 +23,9 @@ enum SelectionType {
 }
 
 /// An interactive dialog that allows users to select multiple items from a list.
-class MultiSelectableDialog<T> {
+class MultiValuePickerDialog<T> {
   /// The title of the dialog, displayed at the top.
-  final String title;
+  final String? title;
 
   /// (Optional) Custom widget for the title. If provided, it overrides the [title].
   final Widget? titleWidget;
@@ -81,9 +81,9 @@ class MultiSelectableDialog<T> {
   /// (Optional) Callback function to customize the text displaying the number of selected items.
   final Widget Function(List<T>? value)? selectedTextBuilder;
 
-  /// Creates a [MultiSelectableDialog] instance with the specified parameters.
+  /// Creates a [MultiValuePickerDialog] instance with the specified parameters.
   ///
-  /// This constructor allows you to create a new [MultiSelectableDialog] instance with
+  /// This constructor allows you to create a new [MultiValuePickerDialog] instance with
   /// the required and optional parameters. You can customize the appearance and behavior
   /// of the dialog by providing values for [title], [titleWidget], [titleStyle],
   /// [titleBackgroundColor], [items], [itemBuilder], [selectedItemBuilder], [initialSelectedItems],
@@ -100,8 +100,8 @@ class MultiSelectableDialog<T> {
   ///   // ... other parameters ...
   /// );
   /// ```
-  MultiSelectableDialog({
-    required this.title,
+  MultiValuePickerDialog({
+    this.title,
     this.titleWidget,
     this.titleStyle,
     this.titleBackgroundColor,
@@ -186,16 +186,17 @@ class MultiSelectableDialog<T> {
                     alignment: Alignment.centerLeft,
                     child: Row(
                       children: [
-                        Expanded(
-                          child: titleWidget ??
-                              Text(
-                                title,
-                                style: titleStyle ??
-                                    Theme.of(context).textTheme.headlineMedium?.copyWith(
-                                          color: Colors.white,
-                                        ),
-                              ),
-                        ),
+                        if (title != null || titleWidget != null)
+                          Expanded(
+                            child: titleWidget ??
+                                Text(
+                                  title!,
+                                  style: titleStyle ??
+                                      Theme.of(context).textTheme.headlineMedium?.copyWith(
+                                            color: Colors.white,
+                                          ),
+                                ),
+                          ),
                         if (dialogButton == null)
                           IconButton(
                             onPressed: () => Navigator.of(context).pop(selectedItems),
@@ -282,16 +283,22 @@ class MultiSelectableDialog<T> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           if (dialogButton!.negativeButton != null)
-                            InkWell(
-                              onTap: dialogButton!.onNegativeButtonPressed ?? () => Navigator.of(context).pop(),
-                              child: dialogButton!.negativeButton!,
+                            Flexible(
+                              fit: FlexFit.loose,
+                              child: InkWell(
+                                onTap: dialogButton!.onNegativeButtonPressed ?? () => Navigator.of(context).pop(),
+                                child: dialogButton!.negativeButton!,
+                              ),
                             ),
                           const SizedBox(width: 10.0),
                           if (dialogButton!.positiveButton != null)
-                            InkWell(
-                              onTap: dialogButton!.onPositiveButtonPressed ??
-                                  () => Navigator.of(context).pop(selectedItems),
-                              child: dialogButton!.positiveButton!,
+                            Flexible(
+                              fit: FlexFit.loose,
+                              child: InkWell(
+                                onTap: dialogButton!.onPositiveButtonPressed ??
+                                    () => Navigator.of(context).pop(selectedItems),
+                                child: dialogButton!.positiveButton!,
+                              ),
                             ),
                         ],
                       ),

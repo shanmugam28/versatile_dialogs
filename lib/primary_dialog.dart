@@ -204,15 +204,22 @@ class PrimaryDialog<T> {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             if (dialogButton!.negativeButton != null)
-                              InkWell(
-                                onTap: dialogButton!.onNegativeButtonPressed ?? () => Navigator.of(context).pop(false),
-                                child: dialogButton!.negativeButton!,
+                              Flexible(
+                                fit: FlexFit.loose,
+                                child: InkWell(
+                                  onTap:
+                                      dialogButton!.onNegativeButtonPressed ?? () => Navigator.of(context).pop(false),
+                                  child: dialogButton!.negativeButton!,
+                                ),
                               ),
                             const SizedBox(width: 10.0),
                             if (dialogButton!.positiveButton != null)
-                              InkWell(
-                                onTap: dialogButton!.onPositiveButtonPressed ?? () => Navigator.of(context).pop(true),
-                                child: dialogButton!.positiveButton!,
+                              Flexible(
+                                fit: FlexFit.loose,
+                                child: InkWell(
+                                  onTap: dialogButton!.onPositiveButtonPressed ?? () => Navigator.of(context).pop(true),
+                                  child: dialogButton!.positiveButton!,
+                                ),
                               ),
                           ],
                         ),
