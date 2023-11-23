@@ -12,6 +12,11 @@ class PrimaryDialog<T> {
   /// prominently displayed at the top of the dialog box.
   final String title;
 
+  /// the widget for the title
+  ///
+  /// if provided, then [title], [titleStyle], [titleBackgroundColor] are no use
+  final Widget? titleWidget;
+
   /// The style for the title text.
   ///
   /// If not provided, the default style is used based on the current theme.
@@ -98,6 +103,7 @@ class PrimaryDialog<T> {
     required this.title,
     this.titleStyle,
     this.titleBackgroundColor,
+    this.titleWidget,
     this.description,
     this.descriptionStyle,
     this.body,
@@ -163,13 +169,14 @@ class PrimaryDialog<T> {
                         ),
                       ),
                       alignment: Alignment.centerLeft,
-                      child: Text(
-                        title,
-                        style: titleStyle ??
-                            Theme.of(context).textTheme.headlineMedium?.copyWith(
-                                  color: Colors.white,
-                                ),
-                      ),
+                      child: titleWidget ??
+                          Text(
+                            title,
+                            style: titleStyle ??
+                                Theme.of(context).textTheme.headlineMedium?.copyWith(
+                                      color: Colors.white,
+                                    ),
+                          ),
                     ),
                     if (description != null)
                       Padding(
