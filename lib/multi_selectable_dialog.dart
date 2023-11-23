@@ -174,7 +174,7 @@ class MultiSelectableDialog<T> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    // height: titleHeight,
+                    height: titleHeight,
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     decoration: BoxDecoration(
                       color: titleBackgroundColor ?? Theme.of(context).colorScheme.primary,
