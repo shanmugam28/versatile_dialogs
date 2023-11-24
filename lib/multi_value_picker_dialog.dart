@@ -1,26 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'dialog_buttons.dart';
-
-/// Defines the type of selection behavior in the [MultiValuePickerDialog].
-///
-/// The [SelectionType] enum is used to specify how items in the [MultiValuePickerDialog]
-/// should be selected by users. It has two possible values:
-///
-/// - [checkboxTap]: Users can select items by tapping on checkboxes.
-/// - [itemTap]: Users can select items by tapping directly on the items themselves.
-///
-/// Example:
-/// ```dart
-/// SelectionType selectionType = SelectionType.checkboxTap;
-/// ```
-enum SelectionType {
-  /// Users can select items by tapping on checkboxes.
-  checkboxTap,
-
-  /// Users can select items by tapping directly on the items themselves.
-  itemTap,
-}
+import 'common/multi_dialog_selection_type.dart';
+import 'common/dialog_buttons.dart';
 
 /// An interactive dialog that allows users to select multiple items from a list.
 class MultiValuePickerDialog<T> {
@@ -55,7 +36,7 @@ class MultiValuePickerDialog<T> {
   final bool initiallyMultiSelectAllItems;
 
   /// The type of selection behavior in the dialog.
-  final SelectionType selectionType;
+  final MultiDialogSelectionType selectionType;
 
   /// The elevation of the dialog.
   final double elevation;
@@ -111,7 +92,7 @@ class MultiValuePickerDialog<T> {
     this.initialSelectedItems,
     this.dialogButton,
     this.initiallyMultiSelectAllItems = false,
-    this.selectionType = SelectionType.checkboxTap,
+    this.selectionType = MultiDialogSelectionType.checkboxTap,
     this.elevation = 10.0,
     this.dialogWidth,
     this.dialogHeight,
@@ -125,8 +106,8 @@ class MultiValuePickerDialog<T> {
           "Either 'initiallyMultiSelectAllItems' or 'initialSelectedItems' should be provided.",
         ),
         assert(
-          (selectionType != SelectionType.itemTap || selectedItemBuilder != null),
-          "If selectionType is '[SelectionType.itemTap]',"
+          (selectionType != MultiDialogSelectionType.itemTap || selectedItemBuilder != null),
+          "If selectionType is '[MultiDialogSelectionType.itemTap]',"
           " 'selectedItemBuilder' should be implemented to differentiate the selected and un-selected items",
         ),
         assert(
@@ -237,7 +218,7 @@ class MultiValuePickerDialog<T> {
                                 children: [
                                   Expanded(
                                     child: InkWell(
-                                      onTap: selectionType == SelectionType.checkboxTap
+                                      onTap: selectionType == MultiDialogSelectionType.checkboxTap
                                           ? null
                                           : () {
                                               if (!selectedItems.contains(items[index])) {
@@ -252,7 +233,7 @@ class MultiValuePickerDialog<T> {
                                           : itemBuilder.call(context, items[index]),
                                     ),
                                   ),
-                                  if (selectionType == SelectionType.checkboxTap)
+                                  if (selectionType == MultiDialogSelectionType.checkboxTap)
                                     Checkbox(
                                       side: BorderSide(
                                         color: Theme.of(context).colorScheme.outline,

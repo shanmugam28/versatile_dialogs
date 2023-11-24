@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'dialog_buttons.dart';
+import 'common/dialog_buttons.dart';
 
 /// A customizable dialog that can display a title, description, body, and buttons.
 class PrimaryDialog<T> {

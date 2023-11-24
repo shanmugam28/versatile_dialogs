@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:versatile_dialogs/loading_dialog.dart';
 
-import 'dialog_buttons.dart';
+import 'common/dialog_buttons.dart';
 
 /// A dialog that allows users to pick a single value from a future list of items.
 class LazySingleValuePickerDialog<T> {
