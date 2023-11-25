@@ -1,5 +1,5 @@
 name: versatile_dialogs
-description: A new Flutter package.
+description: A versatile Flutter package that provides customizable dialogs for single and multi-value selection, including lazy loading and various customization options.
 version: 0.0.1
 homepage:
 
