@@ -36,6 +36,23 @@ void main() {
     );
   });
 
+  group('Custom primary dialog', () {
+    testWidgets(
+      'OK button',
+      (widgetTester) async {
+        await widgetTester.pumpWidget(const MyApp());
+        final primaryDialogButton =
+            find.byKey(const ValueKey('customPrimaryDialogButton'));
+        await widgetTester.tap(primaryDialogButton);
+        await widgetTester.pump();
+        final negativeButton = find.byKey(const ValueKey('negativeButton'));
+        await widgetTester.tap(negativeButton);
+        await widgetTester.pump();
+        expect(find.text("Pressed Cancel button"), findsOneWidget);
+      },
+    );
+  });
+
   group('Loading dialog', () {
     testWidgets(
       'Load for 3 seconds',
@@ -43,6 +60,21 @@ void main() {
         await widgetTester.pumpWidget(const MyApp());
         final loadingDialogButton =
             find.byKey(const ValueKey('loadingDialogButton'));
+        await widgetTester.tap(loadingDialogButton);
+        await widgetTester.pump();
+        await widgetTester.pump(const Duration(milliseconds: 3500));
+        expect(find.text("Dialog loaded for 3 seconds"), findsOneWidget);
+      },
+    );
+  });
+
+  group('Custom loading dialog', () {
+    testWidgets(
+      'Load for 3 seconds',
+      (widgetTester) async {
+        await widgetTester.pumpWidget(const MyApp());
+        final loadingDialogButton =
+            find.byKey(const ValueKey('customLoadingDialogButton'));
         await widgetTester.tap(loadingDialogButton);
         await widgetTester.pump();
         await widgetTester.pump(const Duration(milliseconds: 3500));
@@ -79,6 +111,21 @@ void main() {
         await widgetTester.tap(item);
         await widgetTester.pump();
         expect(find.text("'six' picked"), findsOneWidget);
+      },
+    );
+
+    testWidgets(
+      'Pick nothing button',
+      (widgetTester) async {
+        await widgetTester.pumpWidget(const MyApp());
+        final singleValuePickerDialogButton =
+            find.byKey(const ValueKey('singleValuePickerDialogButton'));
+        await widgetTester.tap(singleValuePickerDialogButton);
+        await widgetTester.pump();
+        final negativeButton = find.byKey(const ValueKey('positiveButton'));
+        await widgetTester.tap(negativeButton);
+        await widgetTester.pump();
+        expect(find.text("No value picked"), findsOneWidget);
       },
     );
 

@@ -87,12 +87,32 @@ class _TestPageState extends State<TestPage> {
               ),
             ),
             Padding(
+              key: const Key('customPrimaryDialogButton'),
+              padding: const EdgeInsets.symmetric(vertical: 10.0),
+              child: ElevatedButton(
+                onPressed: _showCustomPrimaryDialog,
+                child: const Text(
+                  'Custom primary dialog',
+                ),
+              ),
+            ),
+            Padding(
               key: const Key('loadingDialogButton'),
               padding: const EdgeInsets.symmetric(vertical: 10.0),
               child: ElevatedButton(
                 onPressed: _showLoadingDialog,
                 child: const Text(
                   'Loading dialog',
+                ),
+              ),
+            ),
+            Padding(
+              key: const Key('customLoadingDialogButton'),
+              padding: const EdgeInsets.symmetric(vertical: 10.0),
+              child: ElevatedButton(
+                onPressed: _showCustomLoadingDialog,
+                child: const Text(
+                  'Custom loading dialog',
                 ),
               ),
             ),
@@ -184,9 +204,66 @@ class _TestPageState extends State<TestPage> {
     }
   }
 
+  void _showCustomPrimaryDialog() async {
+    PrimaryDialog primaryDialog = PrimaryDialog(
+      key: const Key('customPrimaryDialog'),
+      title: 'Custom primary dialog',
+      description: 'This is a description for primary dialog',
+      dialogButton: DialogButton(
+        context: context,
+        negativeButtonWidget: _getNegativeButtonWidget(
+          const Key('negativeButton'),
+          "OK",
+        ),
+      ),
+    );
+    bool? result = await primaryDialog.show(context);
+
+    if (context.mounted) {
+      SnackBar snackBar = SnackBar(
+        content: Center(
+          child: Text(
+            result == null
+                ? 'Tapped outside of dialog'
+                : result
+                    ? 'Pressed OK button'
+                    : 'Pressed Cancel button',
+          ),
+        ),
+        behavior: SnackBarBehavior.floating,
+      );
+
+      ScaffoldMessenger.of(context)
+        ..clearSnackBars()
+        ..showSnackBar(snackBar);
+    }
+  }
+
   void _showLoadingDialog() async {
     LoadingDialog loadingDialog = LoadingDialog(message: "Loading...")
       ..show(context);
+
+    Future.delayed(const Duration(seconds: 3)).then((value) {
+      loadingDialog.dismiss(context);
+      if (context.mounted) {
+        SnackBar snackBar = const SnackBar(
+          content: Center(
+            child: Text("Dialog loaded for 3 seconds"),
+          ),
+          behavior: SnackBarBehavior.floating,
+        );
+
+        ScaffoldMessenger.of(context)
+          ..clearSnackBars()
+          ..showSnackBar(snackBar);
+      }
+    });
+  }
+
+  void _showCustomLoadingDialog() async {
+    LoadingDialog loadingDialog = LoadingDialog(
+      messageWidget: const Text('Loading...'),
+    )..show(context);
 
     Future.delayed(const Duration(seconds: 3)).then((value) {
       loadingDialog.dismiss(context);
@@ -210,6 +287,7 @@ class _TestPageState extends State<TestPage> {
         SingleValuePickerDialog(
       items: list,
       title: 'Pick a value',
+      showCloseIcon: true,
       itemBuilder: (context, value) {
         return Padding(
           key: Key(value),
@@ -219,6 +297,10 @@ class _TestPageState extends State<TestPage> {
       },
       dialogButton: DialogButton(
         context: context,
+        positiveButtonWidget: _getPositiveButtonWidget(
+          const Key('positiveButton'),
+          "Pick nothing",
+        ),
         negativeButtonWidget: _getNegativeButtonWidget(
           const Key('negativeButton'),
           "Cancel",
@@ -308,6 +390,7 @@ class _TestPageState extends State<TestPage> {
         child: Text(value),
       ),
       title: 'Pick a value',
+      showCloseIcon: true,
       dialogButton: DialogButton(
         context: context,
         negativeButtonWidget: _getNegativeButtonWidget(
