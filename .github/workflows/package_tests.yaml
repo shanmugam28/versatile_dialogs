@@ -50,7 +50,7 @@ jobs:
 
       # Run Dart Format to ensure formatting is valid
       - name: Run Dart Format
-      - run: dart format lib test --set-exit-if-changed
+        run: dart format lib test --set-exit-if-changed
 
       # Run Flutter tests to ensure basic working
       - name: Run Flutter Tests
