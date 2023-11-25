@@ -91,7 +91,10 @@ class LazySingleValuePickerDialog<T> {
     this.loadingDialog,
   })  : assert(
           (titleWidget == null ||
-              (title == null && titleBackgroundColor == null && !showCloseIcon && titleStyle == null)),
+              (title == null &&
+                  titleBackgroundColor == null &&
+                  !showCloseIcon &&
+                  titleStyle == null)),
           "if titleWidget is provided, then title, titleBackgroundColor, showCloseIcon, titleStyle should not be provided",
         ),
         assert(
@@ -104,7 +107,8 @@ class LazySingleValuePickerDialog<T> {
   /// If [loadingDialog] is provided, it will be displayed while fetching items.
   /// Returns null if no item is selected or fetching items fails.
   Future<T?> show(BuildContext context) async {
-    LoadingDialog loadingDialog = this.loadingDialog ?? LoadingDialog(message: loadingMessage ?? 'Fetching Data');
+    LoadingDialog loadingDialog = this.loadingDialog ??
+        LoadingDialog(message: loadingMessage ?? 'Fetching Data');
 
     loadingDialog.show(context);
 
@@ -113,7 +117,8 @@ class LazySingleValuePickerDialog<T> {
 
     if (context.mounted && items != null) {
       Size screenSize = MediaQuery.of(context).size;
-      bool isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
+      bool isPortrait =
+          MediaQuery.of(context).orientation == Orientation.portrait;
       return await showDialog<T>(
         context: context,
         barrierDismissible: barrierDismissible,
@@ -124,9 +129,15 @@ class LazySingleValuePickerDialog<T> {
               borderRadius: BorderRadius.circular(dialogBorderRadius),
               child: ConstrainedBox(
                 constraints: BoxConstraints(
-                  maxWidth: dialogWidth ?? (isPortrait ? screenSize.width : screenSize.height) * 0.85,
-                  minWidth: dialogWidth ?? (isPortrait ? screenSize.width : screenSize.height) * 0.85,
-                  maxHeight: dialogHeight ?? (isPortrait ? screenSize.height : screenSize.width) * 0.85,
+                  maxWidth: dialogWidth ??
+                      (isPortrait ? screenSize.width : screenSize.height) *
+                          0.85,
+                  minWidth: dialogWidth ??
+                      (isPortrait ? screenSize.width : screenSize.height) *
+                          0.85,
+                  maxHeight: dialogHeight ??
+                      (isPortrait ? screenSize.height : screenSize.width) *
+                          0.85,
                 ),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -141,7 +152,8 @@ class LazySingleValuePickerDialog<T> {
                               right: 20.0,
                             ),
                             decoration: BoxDecoration(
-                              color: titleBackgroundColor ?? Theme.of(context).colorScheme.primary,
+                              color: titleBackgroundColor ??
+                                  Theme.of(context).colorScheme.primary,
                               borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(dialogBorderRadius),
                                 topRight: Radius.circular(dialogBorderRadius),
@@ -152,7 +164,8 @@ class LazySingleValuePickerDialog<T> {
                               children: [
                                 if (showCloseIcon)
                                   IconButton(
-                                    onPressed: () => Navigator.of(context).pop(),
+                                    onPressed: () =>
+                                        Navigator.of(context).pop(),
                                     icon: const Icon(
                                       Icons.clear,
                                       color: Colors.white,
@@ -164,7 +177,10 @@ class LazySingleValuePickerDialog<T> {
                                     child: Text(
                                       title!,
                                       style: titleStyle ??
-                                          Theme.of(context).textTheme.headlineMedium?.copyWith(
+                                          Theme.of(context)
+                                              .textTheme
+                                              .headlineMedium
+                                              ?.copyWith(
                                                 color: Colors.white,
                                               ),
                                     ),
@@ -179,13 +195,16 @@ class LazySingleValuePickerDialog<T> {
                         itemCount: items.length,
                         itemBuilder: (context, index) {
                           return Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 3.0),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 20.0, vertical: 3.0),
                             child: InkWell(
                               borderRadius: BorderRadius.circular(8.0),
-                              onTap: () => Navigator.of(context).pop(items[index]),
+                              onTap: () =>
+                                  Navigator.of(context).pop(items[index]),
                               child: Container(
                                 width: double.infinity,
-                                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 10.0),
                                 child: itemBuilder.call(context, items[index]),
                               ),
                             ),
@@ -193,7 +212,8 @@ class LazySingleValuePickerDialog<T> {
                         },
                       ),
                     ),
-                    if (dialogButton?.positiveButton != null || dialogButton?.negativeButton != null)
+                    if (dialogButton?.positiveButton != null ||
+                        dialogButton?.negativeButton != null)
                       Padding(
                         padding: const EdgeInsets.all(20.0),
                         child: Row(
@@ -203,7 +223,9 @@ class LazySingleValuePickerDialog<T> {
                               Flexible(
                                 fit: FlexFit.loose,
                                 child: InkWell(
-                                  onTap: dialogButton!.onNegativeButtonPressed ?? () => Navigator.of(context).pop(),
+                                  onTap:
+                                      dialogButton!.onNegativeButtonPressed ??
+                                          () => Navigator.of(context).pop(),
                                   child: dialogButton!.negativeButton!,
                                 ),
                               ),
@@ -212,7 +234,9 @@ class LazySingleValuePickerDialog<T> {
                               Flexible(
                                 fit: FlexFit.loose,
                                 child: InkWell(
-                                  onTap: dialogButton!.onPositiveButtonPressed ?? () => Navigator.of(context).pop(),
+                                  onTap:
+                                      dialogButton!.onPositiveButtonPressed ??
+                                          () => Navigator.of(context).pop(),
                                   child: dialogButton!.positiveButton!,
                                 ),
                               ),

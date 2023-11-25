@@ -106,7 +106,8 @@ class MultiValuePickerDialog<T> {
           "Either 'initiallyMultiSelectAllItems' or 'initialSelectedItems' should be provided.",
         ),
         assert(
-          (selectionType != MultiDialogSelectionType.itemTap || selectedItemBuilder != null),
+          (selectionType != MultiDialogSelectionType.itemTap ||
+              selectedItemBuilder != null),
           "If selectionType is '[MultiDialogSelectionType.itemTap]',"
           " 'selectedItemBuilder' should be implemented to differentiate the selected and un-selected items",
         ),
@@ -129,9 +130,11 @@ class MultiValuePickerDialog<T> {
   Future<List<T>?> show(BuildContext context) async {
     initialSelectedItems?.removeWhere((element) => !items.contains(element));
     Size screenSize = MediaQuery.of(context).size;
-    bool isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
+    bool isPortrait =
+        MediaQuery.of(context).orientation == Orientation.portrait;
 
-    List<T> selectedItems = initialSelectedItems != null ? List.from(initialSelectedItems!) : [];
+    List<T> selectedItems =
+        initialSelectedItems != null ? List.from(initialSelectedItems!) : [];
     ValueNotifier<int> selectedItemsCount = ValueNotifier(selectedItems.length);
     if (initiallyMultiSelectAllItems) {
       selectedItems = List.from(items);
@@ -146,9 +149,12 @@ class MultiValuePickerDialog<T> {
             borderRadius: BorderRadius.circular(4.0),
             child: ConstrainedBox(
               constraints: BoxConstraints(
-                minWidth: dialogWidth ?? (isPortrait ? screenSize.width : screenSize.height) * 0.85,
-                maxWidth: dialogWidth ?? (isPortrait ? screenSize.width : screenSize.height) * 0.85,
-                maxHeight: dialogHeight ?? (isPortrait ? screenSize.height : screenSize.width) * 0.85,
+                minWidth: dialogWidth ??
+                    (isPortrait ? screenSize.width : screenSize.height) * 0.85,
+                maxWidth: dialogWidth ??
+                    (isPortrait ? screenSize.width : screenSize.height) * 0.85,
+                maxHeight: dialogHeight ??
+                    (isPortrait ? screenSize.height : screenSize.width) * 0.85,
               ),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -158,7 +164,8 @@ class MultiValuePickerDialog<T> {
                     height: titleHeight,
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     decoration: BoxDecoration(
-                      color: titleBackgroundColor ?? Theme.of(context).colorScheme.primary,
+                      color: titleBackgroundColor ??
+                          Theme.of(context).colorScheme.primary,
                       borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(4.0),
                         topRight: Radius.circular(4.0),
@@ -173,14 +180,18 @@ class MultiValuePickerDialog<T> {
                                 Text(
                                   title!,
                                   style: titleStyle ??
-                                      Theme.of(context).textTheme.headlineMedium?.copyWith(
+                                      Theme.of(context)
+                                          .textTheme
+                                          .headlineMedium
+                                          ?.copyWith(
                                             color: Colors.white,
                                           ),
                                 ),
                           ),
                         if (dialogButton == null)
                           IconButton(
-                            onPressed: () => Navigator.of(context).pop(selectedItems),
+                            onPressed: () =>
+                                Navigator.of(context).pop(selectedItems),
                             icon: const Icon(
                               Icons.check,
                               color: Colors.white,
@@ -195,7 +206,8 @@ class MultiValuePickerDialog<T> {
                       builder: (context, value, child) {
                         return selectedTextBuilder?.call(selectedItems) ??
                             Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 20.0, vertical: 10.0),
                               child: Text(
                                 "${selectedItems.length} Selected",
                                 style: selectedTextStyle,
@@ -210,7 +222,8 @@ class MultiValuePickerDialog<T> {
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
                         return Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 3.0),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20.0, vertical: 3.0),
                           child: ValueListenableBuilder(
                             valueListenable: selectedItemsCount,
                             builder: (context, value, child) {
@@ -218,28 +231,40 @@ class MultiValuePickerDialog<T> {
                                 children: [
                                   Expanded(
                                     child: InkWell(
-                                      onTap: selectionType == MultiDialogSelectionType.checkboxTap
+                                      onTap: selectionType ==
+                                              MultiDialogSelectionType
+                                                  .checkboxTap
                                           ? null
                                           : () {
-                                              if (!selectedItems.contains(items[index])) {
+                                              if (!selectedItems
+                                                  .contains(items[index])) {
                                                 selectedItems.add(items[index]);
                                               } else {
-                                                selectedItems.remove(items[index]);
+                                                selectedItems
+                                                    .remove(items[index]);
                                               }
                                               selectedItemsCount.value += 1;
                                             },
-                                      child: selectedItems.contains(items[index]) && selectedItemBuilder != null
-                                          ? selectedItemBuilder!.call(context, items[index])
-                                          : itemBuilder.call(context, items[index]),
+                                      child: selectedItems
+                                                  .contains(items[index]) &&
+                                              selectedItemBuilder != null
+                                          ? selectedItemBuilder!
+                                              .call(context, items[index])
+                                          : itemBuilder.call(
+                                              context, items[index]),
                                     ),
                                   ),
-                                  if (selectionType == MultiDialogSelectionType.checkboxTap)
+                                  if (selectionType ==
+                                      MultiDialogSelectionType.checkboxTap)
                                     Checkbox(
                                       side: BorderSide(
-                                        color: Theme.of(context).colorScheme.outline,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .outline,
                                         width: 1.5,
                                       ),
-                                      value: selectedItems.contains(items[index]),
+                                      value:
+                                          selectedItems.contains(items[index]),
                                       onChanged: (isChecked) {
                                         if (isChecked ?? false) {
                                           selectedItems.add(items[index]);
@@ -257,7 +282,8 @@ class MultiValuePickerDialog<T> {
                       },
                     ),
                   ),
-                  if (dialogButton?.positiveButton != null || dialogButton?.negativeButton != null)
+                  if (dialogButton?.positiveButton != null ||
+                      dialogButton?.negativeButton != null)
                     Padding(
                       padding: const EdgeInsets.all(20.0),
                       child: Row(
@@ -267,7 +293,8 @@ class MultiValuePickerDialog<T> {
                             Flexible(
                               fit: FlexFit.loose,
                               child: InkWell(
-                                onTap: dialogButton!.onNegativeButtonPressed ?? () => Navigator.of(context).pop(),
+                                onTap: dialogButton!.onNegativeButtonPressed ??
+                                    () => Navigator.of(context).pop(),
                                 child: dialogButton!.negativeButton!,
                               ),
                             ),
@@ -277,7 +304,8 @@ class MultiValuePickerDialog<T> {
                               fit: FlexFit.loose,
                               child: InkWell(
                                 onTap: dialogButton!.onPositiveButtonPressed ??
-                                    () => Navigator.of(context).pop(selectedItems),
+                                    () => Navigator.of(context)
+                                        .pop(selectedItems),
                                 child: dialogButton!.positiveButton!,
                               ),
                             ),

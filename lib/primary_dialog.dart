@@ -4,6 +4,8 @@ import 'common/dialog_buttons.dart';
 
 /// A customizable dialog that can display a title, description, body, and buttons.
 class PrimaryDialog<T> {
+  final Key? key;
+
   /// The (required) title of the dialog is displayed in a large font at the top
   /// of the dialog.
   ///
@@ -101,6 +103,7 @@ class PrimaryDialog<T> {
   /// ```
   PrimaryDialog({
     required this.title,
+    this.key,
     this.titleStyle,
     this.titleBackgroundColor,
     this.titleWidget,
@@ -141,7 +144,8 @@ class PrimaryDialog<T> {
   /// ```
   Future<T?> show(BuildContext context) async {
     Size screenSize = MediaQuery.of(context).size;
-    bool isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
+    bool isPortrait =
+        MediaQuery.of(context).orientation == Orientation.portrait;
     return await showDialog<T>(
       context: context,
       barrierDismissible: barrierDismissible,
@@ -153,16 +157,19 @@ class PrimaryDialog<T> {
               elevation: elevation,
               borderRadius: BorderRadius.circular(dialogBorderRadius),
               child: SizedBox(
-                width: dialogWidth ?? (isPortrait ? screenSize.width : screenSize.height) * 0.85,
+                width: dialogWidth ??
+                    (isPortrait ? screenSize.width : screenSize.height) * 0.85,
                 height: dialogHeight,
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
                       height: titleHeight,
                       padding: const EdgeInsets.symmetric(horizontal: 20.0),
                       decoration: BoxDecoration(
-                        color: titleBackgroundColor ?? Theme.of(context).colorScheme.primary,
+                        color: titleBackgroundColor ??
+                            Theme.of(context).colorScheme.primary,
                         borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(dialogBorderRadius),
                           topRight: Radius.circular(dialogBorderRadius),
@@ -173,7 +180,10 @@ class PrimaryDialog<T> {
                           Text(
                             title,
                             style: titleStyle ??
-                                Theme.of(context).textTheme.headlineMedium?.copyWith(
+                                Theme.of(context)
+                                    .textTheme
+                                    .headlineMedium
+                                    ?.copyWith(
                                       color: Colors.white,
                                     ),
                           ),
@@ -186,7 +196,8 @@ class PrimaryDialog<T> {
                         ),
                         child: Text(
                           description!,
-                          style: descriptionStyle ?? Theme.of(context).textTheme.bodySmall,
+                          style: descriptionStyle ??
+                              Theme.of(context).textTheme.bodySmall,
                         ),
                       ),
                     if (body != null)
@@ -197,7 +208,8 @@ class PrimaryDialog<T> {
                           child: body!,
                         ),
                       ),
-                    if (dialogButton?.positiveButton != null || dialogButton?.negativeButton != null)
+                    if (dialogButton?.positiveButton != null ||
+                        dialogButton?.negativeButton != null)
                       Padding(
                         padding: const EdgeInsets.all(20.0),
                         child: Row(
@@ -207,8 +219,9 @@ class PrimaryDialog<T> {
                               Flexible(
                                 fit: FlexFit.loose,
                                 child: InkWell(
-                                  onTap:
-                                      dialogButton!.onNegativeButtonPressed ?? () => Navigator.of(context).pop(false),
+                                  onTap: dialogButton!
+                                          .onNegativeButtonPressed ??
+                                      () => Navigator.of(context).pop(false),
                                   child: dialogButton!.negativeButton!,
                                 ),
                               ),
@@ -217,7 +230,9 @@ class PrimaryDialog<T> {
                               Flexible(
                                 fit: FlexFit.loose,
                                 child: InkWell(
-                                  onTap: dialogButton!.onPositiveButtonPressed ?? () => Navigator.of(context).pop(true),
+                                  onTap:
+                                      dialogButton!.onPositiveButtonPressed ??
+                                          () => Navigator.of(context).pop(true),
                                   child: dialogButton!.positiveButton!,
                                 ),
                               ),

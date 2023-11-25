@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 /// A simple loading dialog that can display a loading indicator and an optional message.
 class LoadingDialog {
-
   /// The (optional) message to be displayed below the loading indicator.
   ///
   /// This parameter allows you to provide additional information or context
@@ -82,7 +81,6 @@ class LoadingDialog {
     this.dialogBorderRadius = 4.0,
   });
 
-
   /// Displays the loading dialog and returns a [Future] that resolves when the dialog is dismissed.
   ///
   /// This method shows the loading dialog on the screen and returns a [Future]
@@ -103,14 +101,16 @@ class LoadingDialog {
       barrierDismissible: barrierDismissible,
       builder: (context) {
         Size screenSize = MediaQuery.of(context).size;
-        bool isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
+        bool isPortrait =
+            MediaQuery.of(context).orientation == Orientation.portrait;
 
         return Center(
           child: Material(
             elevation: elevation,
             borderRadius: BorderRadius.circular(dialogBorderRadius),
             child: Container(
-              width: dialogWidth ?? (isPortrait ? screenSize.width : screenSize.height) * 0.85,
+              width: dialogWidth ??
+                  (isPortrait ? screenSize.width : screenSize.height) * 0.85,
               height: dialogHeight,
               padding: const EdgeInsets.all(20.0),
               child: Column(
@@ -118,9 +118,11 @@ class LoadingDialog {
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(30.0),
-                    child: progressbarWidget ?? CircularProgressIndicator(
-                      color: progressbarColor ?? Theme.of(context).colorScheme.primary,
-                    ),
+                    child: progressbarWidget ??
+                        CircularProgressIndicator(
+                          color: progressbarColor ??
+                              Theme.of(context).colorScheme.primary,
+                        ),
                   ),
                   if (message != null)
                     Text(

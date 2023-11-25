@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 
 /// A utility class representing positive and negative buttons for a dialog.
 class DialogButton {
+  final Key? positiveButtonKey;
+
+  final Key? negativeButtonKey;
+
   /// The build context for which the buttons are created.
   ///
   /// This is required to access the current theme and context-specific
@@ -78,6 +82,8 @@ class DialogButton {
   /// ```
   DialogButton({
     required this.context,
+    this.positiveButtonKey,
+    this.negativeButtonKey,
     this.positiveButtonName,
     this.positiveButtonBackgroundColor,
     this.positiveButtonStyle,
@@ -104,11 +110,14 @@ class DialogButton {
   /// default-styled button; otherwise, it uses [positiveButtonWidget].
   Widget? get positiveButton => positiveButtonName != null
       ? Container(
+          key: positiveButtonKey,
           decoration: BoxDecoration(
-            color: positiveButtonBackgroundColor ?? Theme.of(context).colorScheme.primary,
+            color: positiveButtonBackgroundColor ??
+                Theme.of(context).colorScheme.primary,
             borderRadius: BorderRadius.circular(4.0),
             border: Border.all(
-              color: positiveButtonBackgroundColor ?? Theme.of(context).colorScheme.primary,
+              color: positiveButtonBackgroundColor ??
+                  Theme.of(context).colorScheme.primary,
               width: 1.0,
             ),
           ),
@@ -134,11 +143,14 @@ class DialogButton {
   /// default-styled button; otherwise, it uses [negativeButtonWidget].
   Widget? get negativeButton => negativeButtonName != null
       ? Container(
+          key: negativeButtonKey,
           decoration: BoxDecoration(
-            color: negativeButtonBackgroundColor ?? Theme.of(context).colorScheme.background,
+            color: negativeButtonBackgroundColor ??
+                Theme.of(context).colorScheme.background,
             borderRadius: BorderRadius.circular(4.0),
             border: Border.all(
-              color: positiveButtonBackgroundColor ?? Theme.of(context).colorScheme.primary,
+              color: positiveButtonBackgroundColor ??
+                  Theme.of(context).colorScheme.primary,
               width: 1.0,
             ),
           ),

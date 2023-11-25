@@ -122,7 +122,8 @@ class LazyMultiValuePickerDialog<T> {
           "Either 'initiallyMultiSelectAllItems' or 'initialSelectedItems' should be provided.",
         ),
         assert(
-          (selectionType != MultiDialogSelectionType.itemTap || selectedItemBuilder != null),
+          (selectionType != MultiDialogSelectionType.itemTap ||
+              selectedItemBuilder != null),
           "If selectionType is '[SelectionType.itemTap]',"
           " 'selectedItemBuilder' should be implemented to differentiate the selected and un-selected items",
         );
@@ -132,7 +133,8 @@ class LazyMultiValuePickerDialog<T> {
   /// If [loadingDialog] is provided, it will be displayed while fetching items.
   /// Returns null if no item is selected or fetching items fails.
   Future<List<T>?> show(BuildContext context) async {
-    LoadingDialog loadingDialog = this.loadingDialog ?? LoadingDialog(message: loadingMessage ?? 'Fetching Data');
+    LoadingDialog loadingDialog = this.loadingDialog ??
+        LoadingDialog(message: loadingMessage ?? 'Fetching Data');
     loadingDialog.show(context);
 
     List<T>? items = await asyncItems.call();
