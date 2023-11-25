@@ -51,7 +51,6 @@ jobs:
       # Run Dart Format to ensure formatting is valid
       - name: Run Dart Format
       - run: dart format lib test --set-exit-if-changed
-        if: matrix.channel == 'master'
 
       # Run Flutter tests to ensure basic working
       - name: Run Flutter Tests
