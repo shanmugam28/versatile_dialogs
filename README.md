@@ -57,7 +57,7 @@ print("Pressed Cancel button");
 }
 ```
 
-[![Watch the video](https://drive.google.com/uc?export=view&id=1C873FK5NrMES6j4l3BKSwQ5bYAF6ltoa)](https://drive.google.com/file/d/1C873FK5NrMES6j4l3BKSwQ5bYAF6ltoa/view?usp=sharing)
+https://github.com/shanmugam28/versatile_dialogs/assets/81793777/599ebf14-32c8-4cba-9f18-a3d31a46f9f5
 
 ### 2. Loading dialog
 
@@ -77,7 +77,7 @@ dismiss the dialog
 loadingDialog.dismiss(context);
 ```
 
-[![Watch the video](https://drive.google.com/uc?export=view&id=1CLjuPImkrc_zs2CgMZ3T1JZ7-5YhsxpS)](https://drive.google.com/file/d/1CLjuPImkrc_zs2CgMZ3T1JZ7-5YhsxpS/view?usp=sharing)
+https://github.com/shanmugam28/versatile_dialogs/assets/81793777/624d9992-1d57-4ead-b4ff-3ea2b511c313
 
 ### 3. Single value picker dialog
 
@@ -113,8 +113,7 @@ if(result != null){
 }
 ```
 
-[![Watch the video](https://drive.google.com/uc?export=view&id=1CS0rlj6IUdqSJTBGazQaJDn61_GUDWPa)](https://drive.google.com/file/d/1CS0rlj6IUdqSJTBGazQaJDn61_GUDWPa/view?usp=sharing)
-
+https://github.com/shanmugam28/versatile_dialogs/assets/81793777/cf4f77d4-0b4e-4c7c-97a2-09e8a62433ce
 
 ### 4. Multi value picker dialog
 
@@ -160,7 +159,7 @@ if(result.isEmpty){
 }
 ```
 
-[![Watch the video](https://drive.google.com/uc?export=view&id=1CSRY4CpqWca0gFvtlJX_LXRObAUUXAav)](https://drive.google.com/file/d/1CSRY4CpqWca0gFvtlJX_LXRObAUUXAav/view?usp=sharing)
+https://github.com/shanmugam28/versatile_dialogs/assets/81793777/1c5e0f4c-836a-40d5-b103-fd128ca50abb
 
 ### 5. Lazy single value picker dialog
 
@@ -202,7 +201,7 @@ print("Picked Item -> $item");
 }
 ```
 
-[![Watch the video](https://drive.google.com/uc?export=view&id=1CcXvgjOi4JYSgZRFYmRYFneprGDh1ymK)](https://drive.google.com/file/d/1CcXvgjOi4JYSgZRFYmRYFneprGDh1ymK/view?usp=sharing)
+https://github.com/shanmugam28/versatile_dialogs/assets/81793777/8817844b-ece4-44af-8d8b-1e9599a3d8c9
 
 ### 6. Lazy multi value picker dialog
 
@@ -254,4 +253,4 @@ if(result.isEmpty){
 }
 ```
 
-[![Watch the video](https://drive.google.com/uc?export=view&id=1Cce5WSX1o0pg2VhdmZ-CBGODA9uc7Hf4)](https://drive.google.com/file/d/1Cce5WSX1o0pg2VhdmZ-CBGODA9uc7Hf4/view?usp=sharing)
+https://github.com/shanmugam28/versatile_dialogs/assets/81793777/72ce9d3e-9663-416d-8097-90c17b43a769
