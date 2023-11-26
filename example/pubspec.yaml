@@ -1,0 +1,21 @@
+name: example
+publish_to: 'none'
+
+environment:
+  sdk: '>=3.0.5 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  versatile_dialogs:
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+dependency_overrides:
+  versatile_dialogs:
+    path: ../
+
+flutter:
+  uses-material-design: true
