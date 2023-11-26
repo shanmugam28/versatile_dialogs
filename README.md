@@ -14,7 +14,7 @@ To install package go to your terminal and run
 flutter pub add versatile_dialogs
 ```
 
-or add `infinite_scroll_view` to your _pubspec.yaml_ and run
+or add `versatile_dialogs` to your _pubspec.yaml_ and run
 
 ```dart
 flutter pub get

@@ -22,19 +22,20 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const TestPage(),
+      home: const VersatileDialogsExample(),
     );
   }
 }
 
-class TestPage extends StatefulWidget {
-  const TestPage({super.key});
+class VersatileDialogsExample extends StatefulWidget {
+  const VersatileDialogsExample({super.key});
 
   @override
-  State<TestPage> createState() => _TestPageState();
+  State<VersatileDialogsExample> createState() =>
+      _VersatileDialogsExampleState();
 }
 
-class _TestPageState extends State<TestPage> {
+class _VersatileDialogsExampleState extends State<VersatileDialogsExample> {
   List<String> list = ['one', 'two', 'three', 'four', 'five', 'six'];
 
   Future<List<String>> getAsyncItems() async {
@@ -47,14 +48,13 @@ class _TestPageState extends State<TestPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text("Dialog testing page"),
+        title: const Text("Versatile dialogs example"),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Padding(
-              key: const Key('primaryDialogButton'),
               padding: const EdgeInsets.symmetric(vertical: 10.0),
               child: ElevatedButton(
                 onPressed: _showPrimaryDialog,
@@ -64,7 +64,6 @@ class _TestPageState extends State<TestPage> {
               ),
             ),
             Padding(
-              key: const Key('loadingDialogButton'),
               padding: const EdgeInsets.symmetric(vertical: 10.0),
               child: ElevatedButton(
                 onPressed: _showLoadingDialog,
@@ -74,7 +73,6 @@ class _TestPageState extends State<TestPage> {
               ),
             ),
             Padding(
-              key: const Key('singleValuePickerDialogButton'),
               padding: const EdgeInsets.symmetric(vertical: 10.0),
               child: ElevatedButton(
                 onPressed: _showSingleValuePickerDialog,
@@ -84,7 +82,6 @@ class _TestPageState extends State<TestPage> {
               ),
             ),
             Padding(
-              key: const Key('multiValuePickerDialogButton'),
               padding: const EdgeInsets.symmetric(vertical: 10.0),
               child: ElevatedButton(
                 onPressed: _showMultiValuePickerDialog,
@@ -94,7 +91,6 @@ class _TestPageState extends State<TestPage> {
               ),
             ),
             Padding(
-              key: const Key('lazySingleValuePickerDialogButton'),
               padding: const EdgeInsets.symmetric(vertical: 10.0),
               child: ElevatedButton(
                 onPressed: _showLazySingleValuePickerDialog,
@@ -104,7 +100,6 @@ class _TestPageState extends State<TestPage> {
               ),
             ),
             Padding(
-              key: const Key('lazyMultiValuePickerDialogButton'),
               padding: const EdgeInsets.symmetric(vertical: 10.0),
               child: ElevatedButton(
                 onPressed: _showLazyMultiValuePickerDialog,
@@ -121,7 +116,6 @@ class _TestPageState extends State<TestPage> {
 
   void _showPrimaryDialog() async {
     PrimaryDialog primaryDialog = PrimaryDialog(
-      key: const Key('primaryDialog'),
       title: 'Primary dialog',
       body: const Padding(
         padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 10.0),
@@ -183,14 +177,12 @@ class _TestPageState extends State<TestPage> {
       title: 'Pick a value',
       itemBuilder: (context, value) {
         return Padding(
-          key: Key(value),
           padding: const EdgeInsets.all(17.0),
           child: Text(value),
         );
       },
       dialogButton: DialogButton(
         context: context,
-        negativeButtonKey: const Key('negativeButton'),
         negativeButtonName: 'Cancel',
       ),
     );
@@ -221,7 +213,6 @@ class _TestPageState extends State<TestPage> {
       initialSelectedItems: ['three'],
       itemBuilder: (context, value) {
         return Padding(
-          key: Key('disabled$value'),
           padding: const EdgeInsets.all(8.0),
           child: Text(value),
         );
@@ -229,7 +220,6 @@ class _TestPageState extends State<TestPage> {
       // selectionType: MultiDialogSelectionType.itemTap,
       selectedItemBuilder: (context, value) {
         return Padding(
-          key: Key('enabled$value'),
           padding: const EdgeInsets.all(8.0),
           child: Text(
             value,
@@ -239,8 +229,6 @@ class _TestPageState extends State<TestPage> {
       },
       dialogButton: DialogButton(
         context: context,
-        positiveButtonKey: const Key('positiveButton'),
-        negativeButtonKey: const Key('negativeButton'),
         positiveButtonName: 'Pick',
         negativeButtonName: 'Cancel',
       ),
@@ -268,7 +256,6 @@ class _TestPageState extends State<TestPage> {
     LazySingleValuePickerDialog<String> dialog = LazySingleValuePickerDialog(
       asyncItems: getAsyncItems,
       itemBuilder: (context, value) => Padding(
-        key: Key(value),
         padding: const EdgeInsets.all(8.0),
         child: Text(value),
       ),
@@ -276,8 +263,6 @@ class _TestPageState extends State<TestPage> {
       title: 'Pick a value',
       dialogButton: DialogButton(
         context: context,
-        positiveButtonKey: const Key('positiveButton'),
-        negativeButtonKey: const Key('negativeButton'),
         negativeButtonName: 'Cancel',
       ),
     );
@@ -303,15 +288,12 @@ class _TestPageState extends State<TestPage> {
       asyncItems: getAsyncItems,
       initialSelectedItems: ['three'],
       itemBuilder: (context, value) => Padding(
-        key: Key(value),
         padding: const EdgeInsets.all(8.0),
         child: Text(value),
       ),
       title: 'Pick values',
       dialogButton: DialogButton(
         context: context,
-        positiveButtonKey: const Key('positiveButton'),
-        negativeButtonKey: const Key('negativeButton'),
         positiveButtonName: 'Pick',
         negativeButtonName: 'Cancel',
       ),
