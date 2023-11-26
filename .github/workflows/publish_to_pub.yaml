@@ -1,0 +1,44 @@
+name: Publish on Pub
+
+# Controls when the action will run. Triggers the workflow on push to master
+on:
+  push:
+    tags: 
+      # tag pattern on pub.dev: 'v'
+      - 'v[0-9]+.[0-9]+.[0-9]+*'
+
+env:
+  flutter_version: '3.10.5'
+
+jobs:
+  publish:
+    name: Publish to Pub
+
+    permissions:
+      # Required for authentication using OIDC
+      id-token: write
+    
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+      
+      - name: Setup Flutter SDK
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.flutter_version }}
+          channel: stable
+          cache: true
+          cache-key: '${{ runner.OS }}-flutter-sdk-cache-${{ env.flutter_version }}'
+          cache-path: '${{runner.tool_cache}}/flutter'
+          architecture: x64
+
+      - name: Setup Dart
+        uses: dart-lang/setup-dart@v1
+
+      - name: Install dependencies
+        run: dart pub get
+        
+      - name: Publish to pub
+        run: dart pub publish --force
