@@ -30,12 +30,13 @@ class LazyMultiValuePickerDialog<T> {
   /// A builder function that returns a widget to display each item in the list.
   ///
   /// The builder takes the current [BuildContext] and the item value.
-  final Widget Function(BuildContext context, T value) itemBuilder;
+  final Widget Function(BuildContext context, T value, int index) itemBuilder;
 
   /// A builder function that returns a widget to display the selected item.
   ///
   /// The builder takes the current [BuildContext] and the selected item value.
-  final Widget Function(BuildContext context, T value)? selectedItemBuilder;
+  final Widget Function(BuildContext context, T value, int index)?
+      selectedItemBuilder;
 
   /// The initial list of items to be selected when the dialog is displayed.
   final List<T>? initialSelectedItems;

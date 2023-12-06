@@ -175,7 +175,7 @@ class _VersatileDialogsExampleState extends State<VersatileDialogsExample> {
         SingleValuePickerDialog(
       items: list,
       title: 'Pick a value',
-      itemBuilder: (context, value) {
+      itemBuilder: (context, value, index) {
         return Padding(
           padding: const EdgeInsets.all(17.0),
           child: Text(value),
@@ -211,14 +211,14 @@ class _VersatileDialogsExampleState extends State<VersatileDialogsExample> {
       title: 'Pick values',
       items: list,
       initialSelectedItems: ['three'],
-      itemBuilder: (context, value) {
+      itemBuilder: (context, value, index) {
         return Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(value),
         );
       },
       // selectionType: MultiDialogSelectionType.itemTap,
-      selectedItemBuilder: (context, value) {
+      selectedItemBuilder: (context, value, index) {
         return Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
@@ -255,7 +255,7 @@ class _VersatileDialogsExampleState extends State<VersatileDialogsExample> {
   void _showLazySingleValuePickerDialog() async {
     LazySingleValuePickerDialog<String> dialog = LazySingleValuePickerDialog(
       asyncItems: getAsyncItems,
-      itemBuilder: (context, value) => Padding(
+      itemBuilder: (context, value, index) => Padding(
         padding: const EdgeInsets.all(8.0),
         child: Text(value),
       ),
@@ -287,7 +287,7 @@ class _VersatileDialogsExampleState extends State<VersatileDialogsExample> {
     LazyMultiValuePickerDialog<String> dialog = LazyMultiValuePickerDialog(
       asyncItems: getAsyncItems,
       initialSelectedItems: ['three'],
-      itemBuilder: (context, value) => Padding(
+      itemBuilder: (context, value, index) => Padding(
         padding: const EdgeInsets.all(8.0),
         child: Text(value),
       ),

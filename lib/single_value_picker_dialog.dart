@@ -20,7 +20,7 @@ class SingleValuePickerDialog<T> {
   final List<T> items;
 
   /// A callback function that defines how each item should be displayed in the list.
-  final Widget Function(BuildContext context, T value) itemBuilder;
+  final Widget Function(BuildContext context, T value, int index) itemBuilder;
 
   /// Configuration for the dialog buttons (positive and negative buttons).
   final DialogButton? dialogButton;
@@ -185,7 +185,8 @@ class SingleValuePickerDialog<T> {
                               width: double.infinity,
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 10.0),
-                              child: itemBuilder.call(context, items[index]),
+                              child: itemBuilder.call(
+                                  context, items[index], index),
                             ),
                           ),
                         );

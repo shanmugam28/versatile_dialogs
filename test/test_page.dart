@@ -288,7 +288,7 @@ class _TestPageState extends State<TestPage> {
       items: list,
       title: 'Pick a value',
       showCloseIcon: true,
-      itemBuilder: (context, value) {
+      itemBuilder: (context, value, index) {
         return Padding(
           key: Key(value),
           padding: const EdgeInsets.all(17.0),
@@ -332,7 +332,7 @@ class _TestPageState extends State<TestPage> {
       title: 'Pick values',
       items: list,
       initialSelectedItems: ['three', 'five'],
-      itemBuilder: (context, value) {
+      itemBuilder: (context, value, index) {
         return Padding(
           key: Key('disabled$value'),
           padding: const EdgeInsets.all(8.0),
@@ -340,7 +340,7 @@ class _TestPageState extends State<TestPage> {
         );
       },
       selectionType: MultiDialogSelectionType.itemTap,
-      selectedItemBuilder: (context, value) {
+      selectedItemBuilder: (context, value, index) {
         return Padding(
           key: Key('enabled$value'),
           padding: const EdgeInsets.all(8.0),
@@ -384,7 +384,7 @@ class _TestPageState extends State<TestPage> {
   void _showLazySingleValuePickerDialog() async {
     LazySingleValuePickerDialog<String> dialog = LazySingleValuePickerDialog(
       asyncItems: getAsyncItems,
-      itemBuilder: (context, value) => Padding(
+      itemBuilder: (context, value, index) => Padding(
         key: Key(value),
         padding: const EdgeInsets.all(8.0),
         child: Text(value),
@@ -420,7 +420,7 @@ class _TestPageState extends State<TestPage> {
     LazyMultiValuePickerDialog<String> dialog = LazyMultiValuePickerDialog(
       asyncItems: getAsyncItems,
       initialSelectedItems: ['three', 'five'],
-      itemBuilder: (context, value) => Padding(
+      itemBuilder: (context, value, index) => Padding(
         key: Key(value),
         padding: const EdgeInsets.all(8.0),
         child: Text(value),

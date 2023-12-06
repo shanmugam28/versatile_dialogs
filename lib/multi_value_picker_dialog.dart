@@ -21,10 +21,11 @@ class MultiValuePickerDialog<T> {
   final List<T> items;
 
   /// A callback function that defines how each item should be displayed in the list.
-  final Widget Function(BuildContext context, T value) itemBuilder;
+  final Widget Function(BuildContext context, T value, int index) itemBuilder;
 
   /// (Optional) A callback function that defines how selected items should be displayed differently.
-  final Widget Function(BuildContext context, T value)? selectedItemBuilder;
+  final Widget Function(BuildContext context, T value, int index)?
+      selectedItemBuilder;
 
   /// (Optional) The initially selected items in the dialog.
   final List<T>? initialSelectedItems;
@@ -248,10 +249,10 @@ class MultiValuePickerDialog<T> {
                                       child: selectedItems
                                                   .contains(items[index]) &&
                                               selectedItemBuilder != null
-                                          ? selectedItemBuilder!
-                                              .call(context, items[index])
+                                          ? selectedItemBuilder!.call(
+                                              context, items[index], index)
                                           : itemBuilder.call(
-                                              context, items[index]),
+                                              context, items[index], index),
                                     ),
                                   ),
                                   if (selectionType ==

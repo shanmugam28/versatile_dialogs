@@ -28,7 +28,7 @@ class LazySingleValuePickerDialog<T> {
   /// A builder function that returns a widget to display each item in the list.
   ///
   /// The builder takes the current [BuildContext] and the item value.
-  final Widget Function(BuildContext context, T value) itemBuilder;
+  final Widget Function(BuildContext context, T value, int index) itemBuilder;
 
   /// Custom buttons to be displayed in the dialog.
   ///
@@ -205,7 +205,8 @@ class LazySingleValuePickerDialog<T> {
                                 width: double.infinity,
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 10.0),
-                                child: itemBuilder.call(context, items[index]),
+                                child: itemBuilder.call(
+                                    context, items[index], index),
                               ),
                             ),
                           );
